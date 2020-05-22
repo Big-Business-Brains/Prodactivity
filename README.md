@@ -1,5 +1,5 @@
-# ProdActivity-Frontend
-This is the repository for the frontend React Native application of ProdActivity. A gamified productivity app that encourages users to keep active by rewarding their progress. The backend repository can be found [here](https://github.com/rileydnorris/ProdActivity-Backend).
+# Prodactivity-Frontend
+This is the repository for the frontend React Native application of ProdActivity. A gamified productivity app that encourages users to keep active by rewarding their progress. The backend repository can be found [here](https://github.com/rileydnorris/Prodactivity-Backend).
 
 ## Build Instructions
 The [React Native docs](https://reactnative.dev/docs/environment-setup) give full instructions on setting up React Native on macOS or Windows, instructions on macOS setup are below.
