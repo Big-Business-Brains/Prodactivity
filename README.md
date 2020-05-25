@@ -15,11 +15,15 @@ brew install watchman
 ```
 sudo gem install cocoapods
 ```
-5. Install the project's dependencies from Node
+5. Install the iOS dependencies
+```
+cd ios && pod install
+```
+6. Install the project's dependencies from Node
 ```
 npm install
 ```
-6. Run the application either through the debug menu in VS Code, or using the following command
+7. Run the application either through the debug menu in VS Code, or using the following command
 ```
 npx react-native run-ios
 ```
