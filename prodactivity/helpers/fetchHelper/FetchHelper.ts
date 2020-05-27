@@ -1,12 +1,4 @@
-// INTERFACES
-interface GetParams {
-    [index: string]: any
-}
-
-interface JSONResponse {
-    [index: string]: any
-}
-
+import { GetParams, JSONResponse } from './interfaces';
 
 // HELPER FUNCTIONS
 
@@ -17,8 +9,6 @@ const _api = async (url: string, options: RequestInit): Promise<JSONResponse | u
 
     const response: Response = await fetch(encodedURL, options);
     if (!response.ok) {
-        console.log(response.statusText);
-        console.log(response.status);
         throw new ResponseError(response.statusText);
     }
 
@@ -111,5 +101,9 @@ const get = async (url: string, params?: GetParams, authToken?: string): Promise
 }
 
 
+const FetchHelper = {
+    post,
+    get,
+}
 
-export default { post, get };
+export { FetchHelper };

@@ -1,2 +1,2 @@
-import FetchHelper from './FetchHelper';
-export { FetchHelper };
+export { FetchHelper } from './fetchHelper';
+export type { GetParams, JSONResponse } from './fetchHelper';
