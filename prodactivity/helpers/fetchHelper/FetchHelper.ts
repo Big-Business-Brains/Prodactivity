@@ -7,12 +7,18 @@ const _api = async (url: string, options: RequestInit): Promise<JSONResponse | u
 
     const encodedURL: string = encodeURI(url);
 
-    const response: Response = await fetch(encodedURL, options);
-    if (!response.ok) {
-        throw new ResponseError(response.statusText);
-    }
+    var response = await fetch(encodedURL, options);
 
-    return await response.json();
+    try {
+        var json = await response.json();
+        if (response.ok) {
+            return json.result;
+        } else {
+            throw new ResponseError(json.message);
+        }
+    } catch (err) {
+        throw err;
+    }
 }
 
 
