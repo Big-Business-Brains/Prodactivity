@@ -1,4 +1,5 @@
 import RoutineViewModel from '../models/RoutineViewModel';
+import { FetchHelper } from '../helpers';
 
 export default class RoutineManager {
 
@@ -12,14 +13,13 @@ export default class RoutineManager {
      */
     async getRoutines(): Promise<RoutineViewModel[] | undefined> {
         try {
-            let response = await fetch(`${this.baseURL}`);
-            let jsonRoutines = await response.json();
-            
-            var routines: RoutineViewModel[] = [];
+            const jsonRoutines = await FetchHelper.get(this.baseURL);
+
+            const routines: RoutineViewModel[] = [];
             for (var routine in jsonRoutines) {
                 routines.push(Object.assign(new RoutineViewModel, jsonRoutines[routine]));
             }
-            
+
             return routines;
         } catch (error) {
             console.error(error);
@@ -33,8 +33,7 @@ export default class RoutineManager {
      */
     async getRoutine(routineId: string): Promise<RoutineViewModel | undefined> {
         try {
-            let response = await fetch(`${this.baseURL}/byroutineid/?routineId=${routineId}`);
-            let routine = await response.json();
+            const routine = await FetchHelper.get(`${this.baseURL}/byroutineid/`, { routineId });
             return Object.assign(new RoutineViewModel, routine);
         } catch (error) {
             console.error(error);
