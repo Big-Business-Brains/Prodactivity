@@ -9,7 +9,7 @@ import AddRoutinePage from './components/pages/AddRoutinePage';
 import LoginPage from './components/pages/LoginPage';
 import SplashPage from './components/pages/SplashPage';
 import AuthenticationService from './helpers/AuthenticationService';
-import { UserContextProvider, UserContext } from './application/Contexts';
+import { UserContext } from './application/Contexts';
 
 const HomeStack = createStackNavigator();
 function HomeStackScreen() {
@@ -53,22 +53,21 @@ function LoginStackScreen(setUserId: (userId: string) => void) {
 
 const Tab = createBottomTabNavigator();
 const App: () => React.ReactNode = () => {
+    const userContext = React.useContext(UserContext);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-
-    const [userId, setUserId] = useState<string>('not working');
+    const [userId, setUserId] = useState<string>(userContext.user.userId);
 
     const updateUserId = (userId: string) => {
         setUserId(userId);
-        console.log(userId);
     };
 
     useEffect(() => {
         AuthenticationService.authenticateUser().then(authenticated => {
-            setIsAuthenticated(false);
+            setIsAuthenticated(authenticated);
             setIsLoading(false);
         });
-    }, []);
+    }, [userId]);
 
     if (isLoading) {
         return <SplashPage />;
@@ -78,23 +77,14 @@ const App: () => React.ReactNode = () => {
         <>
             <NavigationContainer>
                 <UserContext.Provider value={{ user: { userId: userId } }}>
-                    {/* <Text> { user.user.userId } </Text>
-                <Text> { userId } </Text> */}
-                    <UserContext.Consumer>
-                        {user =>
-                            isAuthenticated ? (
-                                <Tab.Navigator>
-                                    <Tab.Screen name="Home" component={HomeStackScreen} />
-                                    <Tab.Screen name="Events" component={HomeStackScreen} />
-                                </Tab.Navigator>
-                            ) : (
-                                <>
-                                    <Text>{user.user.userId}</Text>
-                                    {LoginStackScreen(setUserId)}
-                                </>
-                            )
-                        }
-                    </UserContext.Consumer>
+                    {isAuthenticated ? (
+                        <Tab.Navigator>
+                            <Tab.Screen name="Home" component={HomeStackScreen} />
+                            <Tab.Screen name="Events" component={HomeStackScreen} />
+                        </Tab.Navigator>
+                    ) : (
+                        LoginStackScreen(updateUserId)
+                    )}
                 </UserContext.Provider>
             </NavigationContainer>
         </>

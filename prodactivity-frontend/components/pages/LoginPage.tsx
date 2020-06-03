@@ -20,8 +20,9 @@ export default function LoginPage({ route, navigation }: { route: any; navigatio
 
     const onSaveSubmit = async () => {
         let authenticationResult = await authenticationManager.signIn(email, password);
-        passUserId('');
+        passUserId(authenticationResult.result?.userId);
         if (authenticationResult.message) {
+            authenticationManager.removeAuthenticationTokens();
             return Alert.alert('Error', authenticationResult.message);
         }
     };

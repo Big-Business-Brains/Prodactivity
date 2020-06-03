@@ -63,4 +63,10 @@ export default class AuthenticationManager {
         KeychainHelper.storeToken(authenticationViewModel.accessToken, TokenType.AccessToken);
         KeychainHelper.storeToken(authenticationViewModel.refreshToken, TokenType.RefreshToken);
     };
+
+    removeAuthenticationTokens = () => {
+        KeychainHelper.removeToken(TokenType.UserId);
+        KeychainHelper.removeToken(TokenType.AccessToken);
+        KeychainHelper.removeToken(TokenType.RefreshToken);
+    };
 }
