@@ -2,11 +2,9 @@ import RoutineViewModel from '../models/RoutineViewModel';
 import { FetchHelper } from '../helpers';
 
 export default class RoutineManager {
-
     baseURL = 'http://localhost:5000/routine';
 
-    constructor() {
-    }
+    constructor() {}
 
     /**
      * @returns {RoutineViewModel} ViewModel containing all info for the routine
@@ -17,7 +15,7 @@ export default class RoutineManager {
 
             const routines: RoutineViewModel[] = [];
             for (var routine in jsonRoutines) {
-                routines.push(Object.assign(new RoutineViewModel, jsonRoutines[routine]));
+                routines.push(Object.assign(new RoutineViewModel(), jsonRoutines[routine]));
             }
 
             return routines;
@@ -34,7 +32,7 @@ export default class RoutineManager {
     async getRoutine(routineId: string): Promise<RoutineViewModel | undefined> {
         try {
             const routine = await FetchHelper.get(`${this.baseURL}/byroutineid/`, { routineId });
-            return Object.assign(new RoutineViewModel, routine);
+            return Object.assign(new RoutineViewModel(), routine);
         } catch (error) {
             console.error(error);
             return undefined;

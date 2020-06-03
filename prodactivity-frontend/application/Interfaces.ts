@@ -1,4 +1,4 @@
 interface Result<T> {
-    result?: T
-    message?: string
+    result?: T;
+    message?: string;
 }

@@ -6,9 +6,7 @@ import RoutineManager from '../../managers/RoutineManager';
 import RoutineViewModel from '../../models/RoutineViewModel';
 
 export default function AddRoutinePage() {
-    
     var routineManager: RoutineManager = new RoutineManager();
-
 
     var fieldRef = React.createRef();
 
@@ -24,10 +22,7 @@ export default function AddRoutinePage() {
 
     return (
         <View style={styles.container}>
-            <TextField 
-                label='Routine Name'
-                onSubmitEditing={onSubmit}
-                ref={fieldRef}/>
+            <TextField label="Routine Name" onSubmitEditing={onSubmit} ref={fieldRef} />
         </View>
     );
 }
@@ -35,6 +30,6 @@ export default function AddRoutinePage() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "white",
+        backgroundColor: 'white',
     },
 });

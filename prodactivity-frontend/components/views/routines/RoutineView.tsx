@@ -1,16 +1,16 @@
-import React from 'react'
-import { StyleSheet, View, Text, Image } from 'react-native'
+import React from 'react';
+import { StyleSheet, View, Text, Image } from 'react-native';
 
 type RoutineProps = {
     title: string;
-}
+};
 
 export default function RoutineView(props: RoutineProps) {
     return (
         <View style={styles.container}>
-            <Image source={require('../../../assets/icons/book.png')} style={styles.routineIcon}></Image>
+            <Image source={require('../../../assets/icons/book.png')} style={styles.routineIcon} />
             <Text style={styles.text}>{props.title}</Text>
-            <Image source={require('../../../assets/icons/dot-menu.png')} style={styles.menuIcon}></Image>
+            <Image source={require('../../../assets/icons/dot-menu.png')} style={styles.menuIcon} />
         </View>
     );
 }
@@ -26,12 +26,12 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 1 },
         shadowOpacity: 0.3,
         shadowRadius: 5,
-        color: "red",
-        backgroundColor: "white",
+        color: 'red',
+        backgroundColor: 'white',
     },
     text: {
         flex: 1,
-        fontFamily: "NotoSansHK-Medium",
+        fontFamily: 'NotoSansHK-Medium',
     },
     routineIcon: {
         marginRight: 15,
