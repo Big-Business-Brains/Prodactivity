@@ -29,3 +29,33 @@ npx react-native run-ios
 ```
 
 To run on a real device, you can view instructions [here](https://reactnative.dev/docs/running-on-device)
+
+
+
+# Prodactivity - Backend
+This is the repository for the backend .NET Core application of Prodactivity: A gamified productivity app that encourages users to keep active by rewarding their progress. The frontend repository can be found [here](https://github.com/rileydnorris/Prodactivity-Frontend).
+
+## Build Instructions
+Full instructions on how to install .NET Core and setup in VS Code can be found [here](https://docs.microsoft.com/en-us/dotnet/core/tutorials/using-on-macos)
+
+1. Clone the repo to your local machine
+2. Navigate to the project in your Terminal
+3. Install .NET Core 3.1 SDK from [Microsoft's website](https://dotnet.microsoft.com/download)
+3. Restore the project and ensure dependencies are added properly
+```
+dotnet restore
+```
+4. Build and run the project by pressing the "Run" button in the debug menu in VS Code or run the command below
+```
+dotnet run
+```
+
+## Documentation
+Documentation is generated using [NSwag](https://github.com/RicoSuter/NSwag) for [Swagger](https://swagger.io/) documentation.
+
+To view the documentation:
+1. Build and run the project by pressing the "Run" button in the debug menu in VS Code or run the command below
+```
+dotnet run
+```
+2. Go to `localhost:5001/swagger` in your browser
