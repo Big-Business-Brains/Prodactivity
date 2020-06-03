@@ -19,6 +19,7 @@ export default class KeychainHelper {
     /**
      * Retrieve a stored token inside the keychain.
      * @param {TokenType} tokenType The type of token to be stored
+     * 
      * @returns { Promise<string | undefined> } The retrieved string or undefined if nothing is found
      */
     static retrieveToken = async (tokenType: TokenType): Promise<string | undefined> => {
@@ -28,5 +29,13 @@ export default class KeychainHelper {
         }
 
         return undefined;
+    }
+
+    /**
+     * Removes a stored token inside the keychain.
+     * @param {TokenType} tokenType The type of token to be stored
+     */
+    static removeToken = (tokenType: TokenType) => {
+        Keychain.resetInternetCredentials(`prodactivity_${tokenType}`);
     }
 }

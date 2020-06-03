@@ -8,7 +8,7 @@ const _api = async (url: string, options: RequestInit): Promise<JSONResponse | u
     const encodedURL: string = encodeURI(url);
 
     var response = await fetch(encodedURL, options);
-
+    console.log(response);
     try {
         var json = await response.json();
         if (response.ok) {
