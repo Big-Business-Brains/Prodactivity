@@ -17,10 +17,9 @@ export default class AuthenticationManager {
     async signIn(email: string, password: string): Promise<Result<AuthenticationViewModel>> {
         try {
             let response = await FetchHelper.post(`${this.baseURL}/signIn`, { email: email, password: password });
-
             if (response) {
                 var authViewModel: AuthenticationViewModel = Object.assign(new AuthenticationViewModel(), response);
-                this.storeAuthenticationTokens(authViewModel);
+                await this.storeAuthenticationTokens(authViewModel);
                 return { result: authViewModel };
             }
 
@@ -45,9 +44,8 @@ export default class AuthenticationManager {
             );
 
             if (response) {
-                console.log(`Refreshed tokens: ${response}`);
                 var authViewModel: AuthenticationViewModel = Object.assign(new AuthenticationViewModel(), response);
-                this.storeAuthenticationTokens(authViewModel);
+                await this.storeAuthenticationTokens(authViewModel);
                 return { result: authViewModel };
             }
 
@@ -58,15 +56,15 @@ export default class AuthenticationManager {
         }
     }
 
-    storeAuthenticationTokens = (authenticationViewModel: AuthenticationViewModel) => {
-        KeychainHelper.storeToken(authenticationViewModel.userId, TokenType.UserId);
-        KeychainHelper.storeToken(authenticationViewModel.accessToken, TokenType.AccessToken);
-        KeychainHelper.storeToken(authenticationViewModel.refreshToken, TokenType.RefreshToken);
+    storeAuthenticationTokens = async (authenticationViewModel: AuthenticationViewModel) => {
+        await KeychainHelper.storeToken(authenticationViewModel.userId, TokenType.UserId);
+        await KeychainHelper.storeToken(authenticationViewModel.accessToken, TokenType.AccessToken);
+        await KeychainHelper.storeToken(authenticationViewModel.refreshToken, TokenType.RefreshToken);
     };
 
-    removeAuthenticationTokens = () => {
-        KeychainHelper.removeToken(TokenType.UserId);
-        KeychainHelper.removeToken(TokenType.AccessToken);
-        KeychainHelper.removeToken(TokenType.RefreshToken);
+    removeAuthenticationTokens = async () => {
+        await KeychainHelper.removeToken(TokenType.UserId);
+        await KeychainHelper.removeToken(TokenType.AccessToken);
+        await KeychainHelper.removeToken(TokenType.RefreshToken);
     };
 }

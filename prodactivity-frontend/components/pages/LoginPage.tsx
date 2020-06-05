@@ -8,19 +8,21 @@ import { TokenType } from '../../application/Enums';
 import AuthenticationService from '../../helpers/AuthenticationService';
 
 export default function LoginPage({ route, navigation }: { route: any; navigation: any }) {
-    const passUserId = route.params.passUserId;
     const [email, onChangeEmail] = useState<string>('Email...');
     const [password, onChangePassword] = useState<string>('Password...');
 
     var authenticationManager: AuthenticationManager = new AuthenticationManager();
 
     useEffect(() => {
-        AuthenticationService.authenticateUser().then(authenticated => console.log(authenticated));
     }, []);
 
     const onSaveSubmit = async () => {
+        const updateUserId = route.params.updateUserId;
         let authenticationResult = await authenticationManager.signIn(email, password);
-        passUserId(authenticationResult.result?.userId);
+        if (authenticationResult.result?.userId) {
+            updateUserId(authenticationResult.result.userId);
+        }
+
         if (authenticationResult.message) {
             authenticationManager.removeAuthenticationTokens();
             return Alert.alert('Error', authenticationResult.message);

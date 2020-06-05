@@ -30,8 +30,6 @@ export default class AuthenticationService {
 
         // Refresh tokens, if success then the user is authenticated
         if (refreshToken && userId) {
-            console.log(userId);
-            console.log(refreshToken);
             let authenticationResult = await authenticationManager.refreshTokens(refreshToken, userId);
             return authenticationResult.result ? true : false;
         }

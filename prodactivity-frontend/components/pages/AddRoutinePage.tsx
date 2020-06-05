@@ -12,8 +12,6 @@ export default function AddRoutinePage() {
 
     const onSubmit = () => {
         let { current: field } = fieldRef;
-
-        console.log(field.value());
     };
 
     const formatText = (text: string) => {

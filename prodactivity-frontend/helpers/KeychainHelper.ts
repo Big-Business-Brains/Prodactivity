@@ -30,7 +30,7 @@ export default class KeychainHelper {
      * Removes a stored token inside the keychain.
      * @param {TokenType} tokenType The type of token to be stored
      */
-    static removeToken = (tokenType: TokenType) => {
-        Keychain.resetInternetCredentials(`prodactivity_${tokenType}`);
+    static removeToken = async (tokenType: TokenType) => {
+        await Keychain.resetInternetCredentials(`prodactivity_${tokenType}`);
     };
 }
