@@ -33,7 +33,6 @@ export function HomeStackScreen({ route, navigation }) {
             <HomeStack.Screen
                 name="HomePage"
                 component={HomePage}
-                initialParams={{ updateUserId: route.params.updateUserId }}
                 options={() => ({
                     headerLeft: () => <Button onPress={() => navigation.navigate('ProfilePage')} title="Profile" />,
                     headerRight: () => <Button onPress={() => navigation.navigate('AddRoutinePage')} title="+" />,
@@ -68,10 +67,6 @@ export function LoginStackScreen({ route, navigation }) {
                 initialParams={{
                     updateUserId: route.params.updateUserId,
                 }}
-                options={({ route, navigation }) => ({
-                    title: 'Login',
-                    animationTypeForReplace: route.params.isAuthenticated ? 'push' : 'pop',
-                })}
             />
         </LoginStack.Navigator>
     );

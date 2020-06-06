@@ -44,7 +44,11 @@ const App: () => React.ReactNode = () => {
                             <AppStack.Screen
                                 name="Login"
                                 component={LoginStackScreen}
-                                initialParams={{ updateUserId: updateUserId, isAuthenticated: isAuthenticated }}
+                                initialParams={{ updateUserId: updateUserId, isAuthenticated: false }}
+                                options={{
+                                    title: 'Login',
+                                    animationTypeForReplace: isAuthenticated ? 'push' : 'pop',
+                                }}
                             />
                         )}
                     </AppStack.Navigator>
