@@ -12,7 +12,7 @@ namespace prodactivity.Controllers
         {
         }
 
-        [HttpPost("register")]
+        [HttpPost("signUp")]
         [AllowAnonymous]
         public async Task<ActionResult<APIResponse>> Register([FromBody] RegisterRequest request)
         {

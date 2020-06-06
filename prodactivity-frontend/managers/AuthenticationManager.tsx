@@ -31,6 +31,36 @@ export default class AuthenticationManager {
     }
 
     /**
+     * @param {string} email The user's email address for sign up
+     * @param {string} password The user's password for sign up
+     * @param {string} firstName The user's first name
+     * @param {string} lastName The user's last name
+     *
+     * @returns {AuthenticationViewModel} View Model containing all info for the sign up
+     */
+    async signUp(
+        email: string,
+        password: string,
+        firstName: string,
+        lastName: string,
+    ): Promise<Result<AuthenticationViewModel>> {
+        try {
+            let responseBody = { email: email, password: password, firstName: firstName, lastName: lastName };
+            let response = await FetchHelper.post(`${this.baseURL}/signUp`, responseBody);
+            if (response) {
+                var authViewModel: AuthenticationViewModel = Object.assign(new AuthenticationViewModel(), response);
+                await this.storeAuthenticationTokens(authViewModel);
+                return { result: authViewModel };
+            }
+
+            return { message: 'There has been a problem signing in, try a different email/password and try again.' };
+        } catch (error) {
+            console.log(error);
+            return { message: error.message };
+        }
+    }
+
+    /**
      * @param {string} refreshToken The current refresh token
      *
      * @returns {AuthenticationViewModel} View Model containing all info for the login
