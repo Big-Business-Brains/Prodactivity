@@ -15,15 +15,19 @@ brew install watchman
 ```
 sudo gem install cocoapods
 ```
-5. Install the project's dependencies from Node
+5. Navigate to the frontend directory
+```
+cd prodactivity-frontend
+```
+6. Install the project's dependencies from Node
 ```
 npm install
 ```
-6. Install the iOS dependencies
+7. Install the iOS dependencies
 ```
 cd ios && pod install
 ```
-7. Run the application either through the debug menu in VS Code, or using the following command
+8. Run the application either through the debug menu in VS Code, or using the following command
 ```
 npx react-native run-ios
 ```
@@ -39,7 +43,10 @@ This is the repository for the backend .NET Core application of Prodactivity: A 
 Full instructions on how to install .NET Core and setup in VS Code can be found [here](https://docs.microsoft.com/en-us/dotnet/core/tutorials/using-on-macos)
 
 1. Clone the repo to your local machine
-2. Navigate to the project in your Terminal
+2. Navigate to the project in your Terminal, and go to the prodactivity-backend directory
+```
+cd prodactivity-backend
+```
 3. Install .NET Core 3.1 SDK from [Microsoft's website](https://dotnet.microsoft.com/download)
 3. Restore the project and ensure dependencies are added properly
 ```
