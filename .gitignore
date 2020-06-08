@@ -253,6 +253,8 @@ _NCrunch_*
 .*crunch*.local.xml
 nCrunchTemp_*
 
+*.vscode
+
 # MightyMoose
 *.mm.*
 AutoTest.Net/

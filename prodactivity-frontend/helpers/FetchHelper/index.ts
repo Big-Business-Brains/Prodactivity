@@ -1,3 +1,2 @@
 export { FetchHelper } from './FetchHelper';
-export type { GetParams, JSONResponse } from './interfaces';
-
+// export type { GetParams, JSONResponse } from './interfaces';

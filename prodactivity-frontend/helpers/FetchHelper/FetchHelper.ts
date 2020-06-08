@@ -1,95 +1,132 @@
 import { GetParams, JSONResponse } from './interfaces';
+import KeychainHelper from '../KeychainHelper';
+import { TokenType } from '../../application/Enums';
+import { ResponseError } from '../../application/Errors';
+import RoutineViewModel from '../../models/RoutineViewModel';
 
-// HELPER FUNCTIONS
+export class FetchHelper {
+    /**
+     * Send a get request to a given URL
+     * @param {string} url The URL to send a get request to
+     * @param {GetParams} params The parameters to attach to the get request
+     *
+     */
+    static get = async <T>(url: string, Type: { new (): T }, params?: GetParams): Promise<Result<T>> => {
+        const options: RequestInit = {
+            method: 'GET',
+            headers: await FetchHelperUtils._headers(),
+        };
 
-// Actually makes the fetch call and throws an Error if our status code is bad
-const _api = async (url: string, options: RequestInit): Promise<JSONResponse | undefined> => {
-    const encodedURL: string = encodeURI(url);
-
-    var response = await fetch(encodedURL, options);
-    try {
-        var json = await response.json();
-        if (response.ok) {
-            return json.result;
-        } else {
-            throw new ResponseError(json.message);
+        if (params) {
+            url += FetchHelperUtils._formatGetParams(params);
         }
-    } catch (err) {
-        throw err;
-    }
-};
 
-// Formats GETParams into a query string
-const _formatGetParams = (params: GetParams): string => {
-    const urlParams: URLSearchParams = new URLSearchParams();
-
-    for (const key in params) {
-        const val: any = params[key];
-
-        if (Array.isArray(val)) {
-            for (const index in val) {
-                urlParams.append(key, val[index]);
-            }
-        } else {
-            urlParams.append(key, val);
+        try {
+            const jsonResponse = await FetchHelperUtils._api(url, options);
+            return FetchHelperUtils._formatResult<T>(jsonResponse, Type);
+        } catch (error) {
+            console.log(error);
+            return { message: error.message };
         }
-    }
+    };
 
-    return urlParams.toString();
-};
+    /**
+     * Send a post request to a given URL
+     * @param {string} url The URL to send a post request to
+     * @param {object} body The body to attach to the ost request
+     */
+    static post = async <T>(url: string, Type: { new (): T }, body: object): Promise<Result<T>> => {
+        const options: RequestInit = {
+            method: 'POST',
+            headers: await FetchHelperUtils._headers(),
+            body: JSON.stringify(body),
+        };
 
-// Creates our headers for the HTTP requests
-const _headers = (authToken?: string, contentType: string = 'application/json'): Headers => {
-    const headers: Headers = new Headers();
-    headers.append('Content-Type', contentType);
-
-    if (authToken) {
-        headers.append('Authorization', `Bearer ${authToken}`);
-    }
-
-    return headers;
-};
-
-// Custom error class whenever an API gives us an error status code
-class ResponseError extends Error {
-    constructor(message: string) {
-        super(message);
-        this.name = 'ResponseError';
-    }
+        try {
+            const jsonResponse = await FetchHelperUtils._api(url, options);
+            return FetchHelperUtils._formatResult(jsonResponse, Type);
+        } catch (error) {
+            console.log(error);
+            return { message: error.message };
+        }
+    };
 }
 
-// "PUBLIC" FUNCTIONS
+class FetchHelperUtils {
+    /**
+     * Performs an API call using the specified URL and options
+     * @param {string} url The URL to send a request to
+     * @param {RequestInit} options The request object to send to the specified URL
+     *
+     * @returns {JSONResponse} A JSON formatted object retrieved from the URL
+     */
+    static _api = async (url: string, options: RequestInit): Promise<JSONResponse> => {
+        const encodedURL: string = encodeURI(url);
 
-// This module provides some extra utility ontop of the barebones Fetch method
-
-// Helper method to make a POST call using JSON
-const post = async (url: string, body: object, authToken?: string): Promise<JSONResponse | undefined> => {
-    const options: RequestInit = {
-        method: 'POST',
-        headers: _headers(authToken),
-        body: JSON.stringify(body),
+        var response = await fetch(encodedURL, options);
+        try {
+            var json = await response.json();
+            if (response.ok) {
+                return json.result;
+            } else {
+                throw new ResponseError(json.message);
+            }
+        } catch (err) {
+            throw err;
+        }
     };
 
-    return await _api(url, options);
-};
+    /**
+     * Formats GET parameters into a query string
+     * @param {GetParams} params The GetParams to convert
+     *
+     * @returns {string} The formatted query string
+     */
+    static _formatGetParams = (params: GetParams): string => {
+        const urlParams: URLSearchParams = new URLSearchParams();
 
-// Helper method to make a GET call using JSON
-const get = async (url: string, params?: GetParams, authToken?: string): Promise<JSONResponse | undefined> => {
-    const options: RequestInit = {
-        method: 'GET',
-        headers: _headers(authToken),
+        for (const key in params) {
+            const val: any = params[key];
+
+            if (Array.isArray(val)) {
+                for (const index in val) {
+                    urlParams.append(key, val[index]);
+                }
+            } else {
+                urlParams.append(key, val);
+            }
+        }
+
+        return urlParams.toString();
     };
 
-    if (params) {
-        url += _formatGetParams(params);
-    }
+    /**
+     * Sets the headers for an API call
+     * @param {string} contentType The content-type to be returned from the API call
+     *
+     * @returns {Headers} Object holding the headers for the request
+     */
+    static _headers = async (contentType: string = 'application/json'): Promise<Headers> => {
+        const headers: Headers = new Headers();
+        const authToken = await KeychainHelper.retrieveToken(TokenType.AccessToken);
 
-    return await _api(url, options);
-};
+        headers.append('Content-Type', contentType);
+        headers.append('Authorization', `Bearer ${authToken}`);
+        return headers;
+    };
 
-const FetchHelper = {
-    post,
-    get,
-};
-
-export { FetchHelper };
+    static _formatResult = <T>(jsonResponse: JSONResponse, Type: { new (): T }): Result<T> => {
+        try {
+            if (jsonResponse instanceof Type) {
+                return { result: jsonResponse as T };
+            } else {
+                throw new ResponseError('Decoding failed');
+            }
+            var decodedObject = Object.assign(new Type(), jsonResponse);
+            return { result: decodedObject };
+        } catch (error) {
+            console.log(error);
+            throw new ResponseError(jsonResponse.message ? jsonResponse.message : error.message);
+        }
+    };
+}

@@ -1,7 +1,8 @@
 import AuthenticationViewModel from '../models/AuthenticationViewModel';
-import { FetchHelper } from '../helpers';
+import FetchHelper from '../helpers';
 import KeychainHelper from '../helpers/KeychainHelper';
 import { TokenType } from '../application/Enums';
+import RoutineViewModel from '../models/RoutineViewModel';
 
 export default class AuthenticationManager {
     baseURL = 'http://localhost:5000/authentication';
@@ -14,21 +15,17 @@ export default class AuthenticationManager {
      *
      * @returns {AuthenticationViewModel} View Model containing all info for the login
      */
-    signIn = async (email: string, password: string): Promise<Result<AuthenticationViewModel>> => {
-        try {
-            let response = await FetchHelper.post(`${this.baseURL}/signIn`, { email: email, password: password });
-            if (response) {
-                var authViewModel: AuthenticationViewModel = Object.assign(new AuthenticationViewModel(), response);
-                await this.storeAuthenticationTokens(authViewModel);
-                return { result: authViewModel };
-            }
+    async signIn(email: string, password: string): Promise<Result<AuthenticationViewModel>> {
+        let response = await FetchHelper.post(`${this.baseURL}/signIn`, AuthenticationViewModel, {
+            email: email,
+            password: password,
+        });
 
-            return { message: 'There has been a problem signing in, try a different email/password and try again.' };
-        } catch (error) {
-            console.log(error);
-            return { message: error.message };
-        }
-    };
+        console.log(`Response: `);
+        console.log(response);
+
+        return { message: response.message };
+    }
 
     /**
      * @param {string} email The user's email address for sign up
