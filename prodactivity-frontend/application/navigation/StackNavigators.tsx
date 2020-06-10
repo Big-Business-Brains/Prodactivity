@@ -9,7 +9,7 @@ import ProfilePage from '../../components/pages/ProfilePage';
 
 /** @returns {JSX.Element} The navigation stack for the tab view */
 const Tab = createBottomTabNavigator();
-export function TabStackNavigator({ route, navigation }) {
+export const TabStackNavigator = ({ route, navigation }) => {
     return (
         <Tab.Navigator>
             <Tab.Screen
@@ -24,10 +24,10 @@ export function TabStackNavigator({ route, navigation }) {
             />
         </Tab.Navigator>
     );
-}
+};
 
 const HomeStack = createStackNavigator();
-export function HomeStackScreen({ route, navigation }) {
+export const HomeStackScreen = ({ route, navigation }) => {
     return (
         <HomeStack.Navigator>
             <HomeStack.Screen
@@ -55,10 +55,10 @@ export function HomeStackScreen({ route, navigation }) {
             />
         </HomeStack.Navigator>
     );
-}
+};
 
 const LoginStack = createStackNavigator();
-export function LoginStackScreen({ route, navigation }) {
+export const LoginStackScreen = ({ route, navigation }) => {
     return (
         <LoginStack.Navigator>
             <LoginStack.Screen
@@ -70,4 +70,4 @@ export function LoginStackScreen({ route, navigation }) {
             />
         </LoginStack.Navigator>
     );
-}
+};

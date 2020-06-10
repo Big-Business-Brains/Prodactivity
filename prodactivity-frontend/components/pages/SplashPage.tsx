@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text } from 'react-native';
 
-export default function SplashPage() {
+const SplashPage = () => {
     return <Text>Loading</Text>;
-}
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -12,3 +12,5 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
 });
+
+export default SplashPage;

@@ -7,7 +7,7 @@ type RoutineListProps = {
     routines: RoutineViewModel[];
 };
 
-export default function RoutineListView(props: RoutineListProps) {
+const RoutineListView = (props: RoutineListProps) => {
     return (
         <FlatList
             data={props.routines}
@@ -15,6 +15,8 @@ export default function RoutineListView(props: RoutineListProps) {
             keyExtractor={(item, index) => index.toString()}
         />
     );
-}
+};
 
 const styles = StyleSheet.create({});
+
+export default RoutineListView;

@@ -6,7 +6,7 @@ import RoutineManager from '../../managers/RoutineManager';
 import RoutineViewModel from '../../models/RoutineViewModel';
 import AuthenticationManager from '../../managers/AuthenticationManager';
 
-export default function HomePage() {
+const HomePage = () => {
     const [routines, setRoutines] = useState<RoutineViewModel[]>([]);
     var routineManager = new RoutineManager();
     var authManager = new AuthenticationManager();
@@ -19,7 +19,7 @@ export default function HomePage() {
             <RoutineListView routines={routines} />
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -27,3 +27,5 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
 });
+
+export default HomePage;

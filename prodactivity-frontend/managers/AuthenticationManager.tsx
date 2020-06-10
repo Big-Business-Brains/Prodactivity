@@ -14,7 +14,7 @@ export default class AuthenticationManager {
      *
      * @returns {AuthenticationViewModel} View Model containing all info for the login
      */
-    async signIn(email: string, password: string): Promise<Result<AuthenticationViewModel>> {
+    signIn = async (email: string, password: string): Promise<Result<AuthenticationViewModel>> => {
         try {
             let response = await FetchHelper.post(`${this.baseURL}/signIn`, { email: email, password: password });
             if (response) {
@@ -28,7 +28,7 @@ export default class AuthenticationManager {
             console.log(error);
             return { message: error.message };
         }
-    }
+    };
 
     /**
      * @param {string} email The user's email address for sign up
@@ -38,12 +38,12 @@ export default class AuthenticationManager {
      *
      * @returns {AuthenticationViewModel} View Model containing all info for the sign up
      */
-    async signUp(
+    signUp = async (
         email: string,
         password: string,
         firstName: string,
         lastName: string,
-    ): Promise<Result<AuthenticationViewModel>> {
+    ): Promise<Result<AuthenticationViewModel>> => {
         try {
             let responseBody = { email: email, password: password, firstName: firstName, lastName: lastName };
             let response = await FetchHelper.post(`${this.baseURL}/signUp`, responseBody);
@@ -58,14 +58,14 @@ export default class AuthenticationManager {
             console.log(error);
             return { message: error.message };
         }
-    }
+    };
 
     /**
      * @param {string} refreshToken The current refresh token
      *
      * @returns {AuthenticationViewModel} View Model containing all info for the login
      */
-    async refreshTokens(refreshToken: string, userId: string): Promise<Result<AuthenticationViewModel>> {
+    refreshTokens = async (refreshToken: string, userId: string): Promise<Result<AuthenticationViewModel>> => {
         try {
             let response = await FetchHelper.post(
                 `${this.baseURL}/refresh`,
@@ -84,7 +84,7 @@ export default class AuthenticationManager {
             console.log(error);
             return { message: error };
         }
-    }
+    };
 
     storeAuthenticationTokens = async (authenticationViewModel: AuthenticationViewModel) => {
         await KeychainHelper.storeToken(authenticationViewModel.userId, TokenType.UserId);

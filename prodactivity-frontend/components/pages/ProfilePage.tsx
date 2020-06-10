@@ -2,11 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Button } from 'react-native';
 import AuthenticationManager from '../../managers/AuthenticationManager';
 
-export default function ProfilePage({ route, navigation }: { route: any; navigation: any }) {
+const ProfilePage = ({ route, navigation }: { route: any; navigation: any }) => {
     var authManager = new AuthenticationManager();
     const updateUserId = route.params.updateUserId;
-
-    useEffect(() => {}, []);
 
     const onLogout = async () => {
         await authManager.removeAuthenticationTokens();
@@ -18,7 +16,7 @@ export default function ProfilePage({ route, navigation }: { route: any; navigat
             <Button onPress={onLogout} title="Sign Out" color="#841584" />
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -26,3 +24,5 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
 });
+
+export default ProfilePage;

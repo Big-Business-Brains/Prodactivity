@@ -9,7 +9,7 @@ export default class RoutineManager {
     /**
      * @returns {RoutineViewModel} ViewModel containing all info for the routine
      */
-    async getRoutines(): Promise<RoutineViewModel[] | undefined> {
+    getRoutines = async (): Promise<RoutineViewModel[] | undefined> => {
         try {
             const jsonRoutines = await FetchHelper.get(this.baseURL);
 
@@ -23,13 +23,13 @@ export default class RoutineManager {
             console.error(error);
             return undefined;
         }
-    }
+    };
 
     /**
      * @param {string} routineId The ID of the routine to be retrieved
      * @returns {RoutineViewModel} ViewModel containing all info for the routine
      */
-    async getRoutine(routineId: string): Promise<RoutineViewModel | undefined> {
+    getRoutine = async (routineId: string): Promise<RoutineViewModel | undefined> => {
         try {
             const routine = await FetchHelper.get(`${this.baseURL}/byroutineid/`, { routineId });
             return Object.assign(new RoutineViewModel(), routine);
@@ -37,5 +37,5 @@ export default class RoutineManager {
             console.error(error);
             return undefined;
         }
-    }
+    };
 }

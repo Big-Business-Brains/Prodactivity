@@ -7,7 +7,7 @@ import KeychainHelper from '../../helpers/KeychainHelper';
 import { TokenType } from '../../application/Enums';
 import AuthenticationService from '../../helpers/AuthenticationService';
 
-export default function LoginPage({ route, navigation }: { route: any; navigation: any }) {
+const LoginPage = ({ route, navigation }: { route: any; navigation: any }) => {
     const [email, onChangeEmail] = useState<string>('Email...');
     const [password, onChangePassword] = useState<string>('Password...');
     const [confirmPassword, onChangeConfirmPassword] = useState<string>('');
@@ -39,11 +39,24 @@ export default function LoginPage({ route, navigation }: { route: any; navigatio
 
     return (
         <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
-            <TextField label="Email" onChangeText={onChangeEmail} error={'Email is a required field'} />
-            <TextField label="Password" onChangeText={onChangePassword} />
+            <TextField 
+                label="Email" 
+                onChangeText={onChangeEmail} 
+                autoCapitalize='none' 
+                autoCompleteType='email' />
+            <TextField label="Password" 
+                onChangeText={onChangePassword} 
+                autoCapitalize='none' 
+                autoCompleteType='password' 
+                secureTextEntry={true} />
             {isSignUp ? (
                 <>
-                <TextField label="Confirm Password" onChangeText={onChangeConfirmPassword} />
+                <TextField 
+                    label="Confirm Password" 
+                    onChangeText={onChangeConfirmPassword} 
+                    autoCapitalize='none' 
+                    autoCompleteType='password' 
+                    secureTextEntry={true} />
                 <TextField label="First Name" onChangeText={onChangeFirstName} />
                 <TextField label="Last Name" onChangeText={onChangeLastName} />
                 </>
@@ -61,3 +74,5 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
 });
+
+export default LoginPage;

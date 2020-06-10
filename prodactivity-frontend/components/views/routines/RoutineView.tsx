@@ -5,7 +5,7 @@ type RoutineProps = {
     title: string;
 };
 
-export default function RoutineView(props: RoutineProps) {
+const RoutineView = (props: RoutineProps) => {
     return (
         <View style={styles.container}>
             <Image source={require('../../../assets/icons/book.png')} style={styles.routineIcon} />
@@ -13,7 +13,7 @@ export default function RoutineView(props: RoutineProps) {
             <Image source={require('../../../assets/icons/dot-menu.png')} style={styles.menuIcon} />
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -44,3 +44,5 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
 });
+
+export default RoutineView;
