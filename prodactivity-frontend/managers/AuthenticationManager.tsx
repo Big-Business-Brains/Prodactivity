@@ -2,7 +2,6 @@ import AuthenticationViewModel from '../models/AuthenticationViewModel';
 import FetchHelper from '../helpers';
 import KeychainHelper from '../helpers/KeychainHelper';
 import { TokenType } from '../application/Enums';
-import RoutineViewModel from '../models/RoutineViewModel';
 
 export default class AuthenticationManager {
     baseURL = 'http://localhost:5000/authentication';
@@ -15,17 +14,18 @@ export default class AuthenticationManager {
      *
      * @returns {AuthenticationViewModel} View Model containing all info for the login
      */
-    async signIn(email: string, password: string): Promise<Result<AuthenticationViewModel>> {
-        let response = await FetchHelper.post(`${this.baseURL}/signIn`, AuthenticationViewModel, {
+    signIn = async (email: string, password: string): Promise<Result<AuthenticationViewModel>> => {
+        const response = await FetchHelper.post<AuthenticationViewModel>(`${this.baseURL}/signIn`, {
             email: email,
             password: password,
         });
 
-        console.log(`Response: `);
-        console.log(response);
+        if (response.result) {
+            await this.storeAuthenticationTokens(response.result);
+        }
 
-        return { message: response.message };
-    }
+        return response;
+    };
 
     /**
      * @param {string} email The user's email address for sign up
@@ -41,20 +41,18 @@ export default class AuthenticationManager {
         firstName: string,
         lastName: string,
     ): Promise<Result<AuthenticationViewModel>> => {
-        try {
-            let responseBody = { email: email, password: password, firstName: firstName, lastName: lastName };
-            let response = await FetchHelper.post(`${this.baseURL}/signUp`, responseBody);
-            if (response) {
-                var authViewModel: AuthenticationViewModel = Object.assign(new AuthenticationViewModel(), response);
-                await this.storeAuthenticationTokens(authViewModel);
-                return { result: authViewModel };
-            }
+        const response = await FetchHelper.post<AuthenticationViewModel>(`${this.baseURL}/signUp`, {
+            email: email,
+            password: password,
+            firstName: firstName,
+            lastName: lastName,
+        });
 
-            return { message: 'There has been a problem signing in, try a different email/password and try again.' };
-        } catch (error) {
-            console.log(error);
-            return { message: error.message };
+        if (response.result) {
+            await this.storeAuthenticationTokens(response.result);
         }
+
+        return response;
     };
 
     /**
@@ -63,24 +61,16 @@ export default class AuthenticationManager {
      * @returns {AuthenticationViewModel} View Model containing all info for the login
      */
     refreshTokens = async (refreshToken: string, userId: string): Promise<Result<AuthenticationViewModel>> => {
-        try {
-            let response = await FetchHelper.post(
-                `${this.baseURL}/refresh`,
-                { refreshToken: refreshToken, userId: userId },
-                await KeychainHelper.retrieveToken(TokenType.AccessToken),
-            );
+        const response = await FetchHelper.post<AuthenticationViewModel>(`${this.baseURL}/refresh`, {
+            refreshToken: refreshToken,
+            userId: userId,
+        });
 
-            if (response) {
-                var authViewModel: AuthenticationViewModel = Object.assign(new AuthenticationViewModel(), response);
-                await this.storeAuthenticationTokens(authViewModel);
-                return { result: authViewModel };
-            }
-
-            return { message: 'There has been a problem signing in, try a different email/password and try again.' };
-        } catch (error) {
-            console.log(error);
-            return { message: error };
+        if (response.result) {
+            await this.storeAuthenticationTokens(response.result);
         }
+
+        return response;
     };
 
     storeAuthenticationTokens = async (authenticationViewModel: AuthenticationViewModel) => {

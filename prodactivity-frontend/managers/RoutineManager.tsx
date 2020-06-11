@@ -9,15 +9,15 @@ export default class RoutineManager {
     /**
      * @returns {Result<RoutineViewModel[]>} Result with view model containing all info for the routine
      */
-    async getRoutines(): Promise<Result<RoutineViewModel[]>> {
+    getRoutines = async (): Promise<Result<RoutineViewModel[]>> => {
         return await FetchHelper.get<RoutineViewModel[]>(this.baseURL);
-    }
+    };
 
     /**
      * @param {string} routineId The ID of the routine to be retrieved
      * @returns {Result<RoutineViewModel>} ViewModel containing all info for the routine
      */
-    async getRoutine(routineId: string): Promise<Result<RoutineViewModel>> {
+    getRoutine = async (routineId: string): Promise<Result<RoutineViewModel>> => {
         return await FetchHelper.get<RoutineViewModel>(`${this.baseURL}/byroutineid/`, { routineId });
-    }
+    };
 }
