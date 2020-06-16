@@ -12,7 +12,7 @@ namespace prodactivity.Controllers
         {
         }
 
-        [HttpPost("register")]
+        [HttpPost("signUp")]
         [AllowAnonymous]
         public async Task<ActionResult<APIResponse>> Register([FromBody] RegisterRequest request)
         {
@@ -34,7 +34,7 @@ namespace prodactivity.Controllers
                 var result = await _authenticationService.SignInUser(request);
                 return Ok(new APIResponse(result));
             }
-            
+
             return BadRequest(new APIResponse("Model is malformed"));
         }
 

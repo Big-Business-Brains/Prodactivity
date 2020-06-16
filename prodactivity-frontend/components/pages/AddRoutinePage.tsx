@@ -5,18 +5,9 @@ import RoutineView from '../views/routines/RoutineView';
 import RoutineManager from '../../managers/RoutineManager';
 import RoutineViewModel from '../../models/RoutineViewModel';
 
-export default function AddRoutinePage() {
-    
+const AddRoutinePage = () => {
     var routineManager: RoutineManager = new RoutineManager();
-
-
-    var fieldRef = React.createRef();
-
-    const onSubmit = () => {
-        let { current: field } = fieldRef;
-
-        console.log(field.value());
-    };
+    const [routineName, setRoutineName] = React.useState<string>('');
 
     const formatText = (text: string) => {
         return text.replace(/[^+\d]/g, '');
@@ -24,17 +15,16 @@ export default function AddRoutinePage() {
 
     return (
         <View style={styles.container}>
-            <TextField 
-                label='Routine Name'
-                onSubmitEditing={onSubmit}
-                ref={fieldRef}/>
+            <TextField label="Routine Name" onChangeText={setRoutineName} />
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "white",
+        backgroundColor: 'white',
     },
 });
+
+export default AddRoutinePage;

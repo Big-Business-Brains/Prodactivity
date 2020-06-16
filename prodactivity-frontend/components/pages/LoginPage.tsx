@@ -7,40 +7,62 @@ import KeychainHelper from '../../helpers/KeychainHelper';
 import { TokenType } from '../../application/Enums';
 import AuthenticationService from '../../helpers/AuthenticationService';
 
-export default function LoginPage({ route, navigation } : {route: any, navigation: any}) {
-
-    const passUserId = route.params.passUserId;
+const LoginPage = ({ route, navigation }: { route: any; navigation: any }) => {
     const [email, onChangeEmail] = useState<string>('Email...');
     const [password, onChangePassword] = useState<string>('Password...');
+    const [confirmPassword, onChangeConfirmPassword] = useState<string>('');
+    const [firstName, onChangeFirstName] = useState<string>('');
+    const [lastName, onChangeLastName] = useState<string>('');
+    const [isSignUp, setIsSignUp] = useState<boolean>(false);
 
     var authenticationManager: AuthenticationManager = new AuthenticationManager();
 
     useEffect(() => {
-        AuthenticationService.authenticateUser()
-        .then(authenticated => console.log(authenticated));
-    }, [])
+    }, []);
 
-    const onSaveSubmit = async () => {
-        let authenticationResult = await authenticationManager.signIn(email, password);
-        passUserId("");
+    const onFinish = async () => {
+        const updateUserId = route.params.updateUserId;
+        let authenticationResult = isSignUp ? await authenticationManager.signUp(email, password, firstName, lastName) : await authenticationManager.signIn(email, password);
+        if (authenticationResult.result?.userId) {
+            updateUserId(authenticationResult.result.userId);
+        }
+
         if (authenticationResult.message) {
-            return Alert.alert("Error", authenticationResult.message);
+            authenticationManager.removeAuthenticationTokens();
+            return Alert.alert('Error', authenticationResult.message);
         }
     };
 
+    const onCreateAccount = async () => {
+        setIsSignUp(!isSignUp);
+    };
+
     return (
-        <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps='handled'>
+        <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
             <TextField 
-                label='Email'
+                label="Email" 
                 onChangeText={onChangeEmail} 
-                error={"Email is a required field"}/>
-            <TextField 
-                label='Password'
-                onChangeText={onChangePassword} />
-            <Button
-                onPress={onSaveSubmit}
-                title="Sign In"
-                color="#841584" />
+                autoCapitalize='none' 
+                autoCompleteType='email' />
+            <TextField label="Password" 
+                onChangeText={onChangePassword} 
+                autoCapitalize='none' 
+                autoCompleteType='password' 
+                secureTextEntry={true} />
+            {isSignUp ? (
+                <>
+                <TextField 
+                    label="Confirm Password" 
+                    onChangeText={onChangeConfirmPassword} 
+                    autoCapitalize='none' 
+                    autoCompleteType='password' 
+                    secureTextEntry={true} />
+                <TextField label="First Name" onChangeText={onChangeFirstName} />
+                <TextField label="Last Name" onChangeText={onChangeLastName} />
+                </>
+            ) : null}
+            <Button onPress={onFinish} title={isSignUp ? "Sign Up" : "Sign In"} color="#841584" />
+            <Button onPress={onCreateAccount} title={isSignUp ? "Login instead" : "No account? Create one"} color="#841584" />
         </ScrollView>
     );
 }
@@ -49,6 +71,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexGrow: 1,
-        backgroundColor: "white",
+        backgroundColor: 'white',
     },
 });
+
+export default LoginPage;
