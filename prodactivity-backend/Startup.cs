@@ -25,11 +25,11 @@ namespace prodactivity
         {
             Configuration = configuration;
 
-			using (var client = new DatabaseContext(new Microsoft.EntityFrameworkCore.DbContextOptions<DatabaseContext>()))
-			{
+            using (var client = new DatabaseContext(new Microsoft.EntityFrameworkCore.DbContextOptions<DatabaseContext>()))
+            {
                 // client.Database.Migrate();
-				// client.Database.EnsureCreated();
-			}
+                // client.Database.EnsureCreated();
+            }
         }
 
         public IConfiguration Configuration { get; }
@@ -47,8 +47,8 @@ namespace prodactivity
                         .AllowCredentials());
             });
 
-			services.AddAutoMapper(typeof(Startup));
-			services.AddEntityFrameworkSqlite().AddDbContext<DatabaseContext>();
+            services.AddAutoMapper(typeof(Startup));
+            services.AddEntityFrameworkSqlite().AddDbContext<DatabaseContext>();
 
             services.AddSwaggerDocument(config =>
             {
@@ -87,7 +87,8 @@ namespace prodactivity
             services.AddMvc();
 
             // Inject dependencies
-			services.AddTransient<RoutineRepository>();
+            services.AddTransient<RoutineRepository>();
+            services.AddTransient<RoutineInstanceRepository>();
             services.AddTransient<AuthenticationService>();
             services.AddTransient<RoutineService>();
 
@@ -112,7 +113,7 @@ namespace prodactivity
             // swagger setup
             app.UseOpenApi();
             app.UseSwaggerUi3();
-            
+
             app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseEndpoints(endpoints =>

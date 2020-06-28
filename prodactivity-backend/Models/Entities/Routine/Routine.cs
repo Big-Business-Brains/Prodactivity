@@ -2,9 +2,10 @@ using System;
 
 namespace prodactivity
 {
-    public class Routine
+    public class Routine : UserObject
     {
-		public Guid Id { get; set; }
         public String Name { get; set; }
+
+        public RRule RecurrenceRule { get; set; }
     }
 }

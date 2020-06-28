@@ -3,10 +3,12 @@ using prodactivity;
 
 public class ProdactivityMappingProfile : Profile
 {
-	public ProdactivityMappingProfile()
-	{
+    public ProdactivityMappingProfile()
+    {
         // Routines
-		CreateMap<Routine, RoutineRequest>();
-        CreateMap<Routine, RoutineResponse>();
-	}
+        CreateMap<Routine, RoutineGetResponse>();
+
+        // RRule
+        CreateMap<RRule, RRuleDTO>();
+    }
 }

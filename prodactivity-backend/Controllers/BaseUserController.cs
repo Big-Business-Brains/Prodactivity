@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -20,6 +21,12 @@ namespace prodactivity
         public async Task<ApplicationUser> GetUser()
         {
             return await _authenticationService.getUserById(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value);
+        }
+
+        [NonAction]
+        public Guid GetUserId()
+        {
+            return new Guid(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value);
         }
     }
 }

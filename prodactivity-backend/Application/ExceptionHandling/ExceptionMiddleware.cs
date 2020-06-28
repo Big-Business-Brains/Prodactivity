@@ -11,12 +11,12 @@ namespace prodactivity
     {
         private readonly RequestDelegate _next;
         private readonly JsonSerializerSettings _jsonSerializerSettings = new JsonSerializerSettings { ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver() };
-    
+
         public ExceptionMiddleware(RequestDelegate next)
         {
             _next = next;
         }
-    
+
         public async Task InvokeAsync(HttpContext httpContext)
         {
             try
@@ -28,13 +28,13 @@ namespace prodactivity
                 await HandleExceptionAsync(httpContext, ex);
             }
         }
-    
+
         private Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
             var exc = exception as APIException;
             context.Response.StatusCode = (exc != null) ? exc.StatusCode : (int)HttpStatusCode.InternalServerError;
             context.Response.ContentType = "application/json";
-            
+
             return context.Response.WriteAsync(JsonConvert.SerializeObject(new APIResponse(exception.Message), _jsonSerializerSettings));
         }
     }
