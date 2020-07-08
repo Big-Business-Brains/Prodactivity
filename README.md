@@ -6,8 +6,7 @@ The [React Native docs](https://reactnative.dev/docs/environment-setup) give ful
 
 1. Install Node and Watchman
 ```
-brew install node
-brew install watchman
+brew install node watchman
 ```
 2. For iOS development, install Xcode from the Mac App Store and this will download compilation tools and simulators for you
 3. You will also need to install the Xcode Command Line Tools. Open Xcode, then choose "Preferences..." from the Xcode menu. Go to the Locations panel and install the tools by selecting the most recent version in the Command Line Tools dropdown.
