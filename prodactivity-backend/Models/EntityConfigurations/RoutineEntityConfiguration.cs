@@ -10,7 +10,7 @@ namespace prodactivity
     {
         public void Configure(EntityTypeBuilder<Routine> routineConfiguration)
         {
-            // serialize the RRule object to JSON string for storing in database
+            // Serialize the RRule object to JSON string for storing in database
             routineConfiguration.Property(m => m.RecurrenceRule).HasConversion(m => JsonConvert.SerializeObject(m), m => JsonConvert.DeserializeObject<RRule>(m));
         }
     }

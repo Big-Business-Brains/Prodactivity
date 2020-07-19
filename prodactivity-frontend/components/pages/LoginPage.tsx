@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, ScrollView, Button, Alert } from 'react-native';
 import AuthenticationManager from '../../managers/AuthenticationManager';
-import AuthenticationViewModel from '../../models/AuthenticationViewModel';
+import AuthenticationDTO from '../../models/AuthenticationDTO';
 import { TextField } from 'react-native-material-textfield';
 import KeychainHelper from '../../helpers/KeychainHelper';
 import { TokenType } from '../../application/Enums';

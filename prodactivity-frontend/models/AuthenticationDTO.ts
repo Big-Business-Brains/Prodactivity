@@ -1,4 +1,4 @@
-export default class AuthenticationViewModel {
+export default class AuthenticationDTO {
     userId: string;
     accessToken: string;
     refreshToken: string;

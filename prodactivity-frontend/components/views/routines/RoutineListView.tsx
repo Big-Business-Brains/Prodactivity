@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, View, FlatList } from 'react-native';
 import RoutineView from './RoutineView';
-import RoutineViewModel from '../../../models/RoutineViewModel';
+import RoutineDTO from '../../../models/RoutineDTO';
 
 type RoutineListProps = {
-    routines: RoutineViewModel[];
+    routines: RoutineDTO[];
 };
 
 const RoutineListView = (props: RoutineListProps) => {

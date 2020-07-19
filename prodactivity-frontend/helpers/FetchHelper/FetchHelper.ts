@@ -64,7 +64,18 @@ class FetchHelperUtils {
 
         var response = await fetch(encodedURL, options);
         try {
-            var json = await response.json();
+            // handling responses with no json, only response codes
+            try {
+                // code will fail and be caught if no JSON response
+                var json = JSON.parse(await response.text());
+            } catch (err) {
+                if (!response.ok) {
+                    throw new ResponseError(response.statusText);
+                }
+                return {};
+            }
+
+            // handling json responses
             if (response.ok) {
                 return json.result;
             } else {

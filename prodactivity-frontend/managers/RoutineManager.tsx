@@ -1,4 +1,4 @@
-import RoutineViewModel from '../models/RoutineViewModel';
+import { RoutineDTO, RoutineAddRequest } from '../models/';
 import FetchHelper from '../helpers';
 
 export default class RoutineManager {
@@ -7,17 +7,29 @@ export default class RoutineManager {
     constructor() {}
 
     /**
-     * @returns {Result<RoutineViewModel[]>} Result with view model containing all info for the routine
+     * @returns {Result<RoutineDTO[]>} Result with view model containing all info for the routine
      */
-    getRoutines = async (): Promise<Result<RoutineViewModel[]>> => {
-        return await FetchHelper.get<RoutineViewModel[]>(this.baseURL);
+    getRoutines = async (): Promise<Result<RoutineDTO[]>> => {
+        return await FetchHelper.get<RoutineDTO[]>(this.baseURL);
     };
 
     /**
      * @param {string} routineId The ID of the routine to be retrieved
-     * @returns {Result<RoutineViewModel>} ViewModel containing all info for the routine
+     * @returns {Result<RoutineDTO>} ViewModel containing all info for the routine
      */
-    getRoutine = async (routineId: string): Promise<Result<RoutineViewModel>> => {
-        return await FetchHelper.get<RoutineViewModel>(`${this.baseURL}/byroutineid/`, { routineId });
+    getRoutine = async (routineId: string): Promise<Result<RoutineDTO>> => {
+        return await FetchHelper.get<RoutineDTO>(`${this.baseURL}/byroutineid/`, { routineId });
+    };
+
+    /**
+     * @param {string} routineId The ID of the routine to be retrieved
+     * @returns {Result<RoutineDTO>} ViewModel containing all info for the routine
+     */
+    addRoutine = async (routineAddRequest: RoutineAddRequest): Promise<Result<boolean>> => {
+        const response = await FetchHelper.post<{}>(this.baseURL, routineAddRequest);
+        return {
+            result: response.message === undefined,
+            message: response.message,
+        };
     };
 }

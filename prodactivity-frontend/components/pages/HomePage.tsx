@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Alert } from 'react-native';
 import RoutineListView from '../views/routines/RoutineListView';
 import RoutineManager from '../../managers/RoutineManager';
-import RoutineViewModel from '../../models/RoutineViewModel';
+import RoutineDTO from '../../models/RoutineDTO';
 
 const HomePage = () => {
-    const [routines, setRoutines] = useState<RoutineViewModel[]>([]);
+    const [routines, setRoutines] = useState<RoutineDTO[]>([]);
     var routineManager = new RoutineManager();
 
     useEffect(() => {

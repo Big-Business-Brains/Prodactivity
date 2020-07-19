@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Alert } from 'react-native';
 import HomePage from '../../components/pages/HomePage';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 import AddRoutinePage from '../../components/pages/AddRoutinePage';
 import LoginPage from '../../components/pages/LoginPage';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -29,7 +29,7 @@ export const TabStackNavigator = ({ route, navigation }) => {
 const HomeStack = createStackNavigator();
 export const HomeStackScreen = ({ route, navigation }) => {
     return (
-        <HomeStack.Navigator>
+        <HomeStack.Navigator mode="modal">
             <HomeStack.Screen
                 name="HomePage"
                 component={HomePage}
@@ -42,7 +42,11 @@ export const HomeStackScreen = ({ route, navigation }) => {
                 name="AddRoutinePage"
                 component={AddRoutinePage}
                 options={{
+                    ...TransitionPresets.ModalPresentationIOS,
                     title: 'Add Routine',
+                    cardOverlayEnabled: true,
+                    headerShown: false,
+                    gestureEnabled: true,
                 }}
             />
             <HomeStack.Screen
