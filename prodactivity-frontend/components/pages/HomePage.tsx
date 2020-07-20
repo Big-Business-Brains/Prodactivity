@@ -1,21 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import RoutineView from '../views/routines/RoutineView';
+import { StyleSheet, View, Alert } from 'react-native';
 import RoutineListView from '../views/routines/RoutineListView';
 import RoutineManager from '../../managers/RoutineManager';
 import RoutineViewModel from '../../models/RoutineViewModel';
-import AuthenticationManager from '../../managers/AuthenticationManager';
 
 const HomePage = () => {
     const [routines, setRoutines] = useState<RoutineViewModel[]>([]);
     var routineManager = new RoutineManager();
-    var authManager = new AuthenticationManager();
 
-    useEffect(() => {}, []);
+    useEffect(() => {
+        routineManager.getRoutines().then(response => {
+            if (response.result) {
+                setRoutines(response.result);
+            } else {
+                return Alert.alert('Error', response.message);
+            }
+        });
+    }, []);
 
     return (
         <View style={styles.container}>
-            <Text>Hello</Text>
             <RoutineListView routines={routines} />
         </View>
     );

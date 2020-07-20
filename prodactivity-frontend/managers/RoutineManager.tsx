@@ -1,5 +1,5 @@
 import RoutineViewModel from '../models/RoutineViewModel';
-import { FetchHelper } from '../helpers';
+import FetchHelper from '../helpers';
 
 export default class RoutineManager {
     baseURL = 'http://localhost:5000/routine';
@@ -7,35 +7,17 @@ export default class RoutineManager {
     constructor() {}
 
     /**
-     * @returns {RoutineViewModel} ViewModel containing all info for the routine
+     * @returns {Result<RoutineViewModel[]>} Result with view model containing all info for the routine
      */
-    getRoutines = async (): Promise<RoutineViewModel[] | undefined> => {
-        try {
-            const jsonRoutines = await FetchHelper.get(this.baseURL);
-
-            const routines: RoutineViewModel[] = [];
-            for (var routine in jsonRoutines) {
-                routines.push(Object.assign(new RoutineViewModel(), jsonRoutines[routine]));
-            }
-
-            return routines;
-        } catch (error) {
-            console.error(error);
-            return undefined;
-        }
+    getRoutines = async (): Promise<Result<RoutineViewModel[]>> => {
+        return await FetchHelper.get<RoutineViewModel[]>(this.baseURL);
     };
 
     /**
      * @param {string} routineId The ID of the routine to be retrieved
-     * @returns {RoutineViewModel} ViewModel containing all info for the routine
+     * @returns {Result<RoutineViewModel>} ViewModel containing all info for the routine
      */
-    getRoutine = async (routineId: string): Promise<RoutineViewModel | undefined> => {
-        try {
-            const routine = await FetchHelper.get(`${this.baseURL}/byroutineid/`, { routineId });
-            return Object.assign(new RoutineViewModel(), routine);
-        } catch (error) {
-            console.error(error);
-            return undefined;
-        }
+    getRoutine = async (routineId: string): Promise<Result<RoutineViewModel>> => {
+        return await FetchHelper.get<RoutineViewModel>(`${this.baseURL}/byroutineid/`, { routineId });
     };
 }
