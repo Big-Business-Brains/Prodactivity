@@ -1,8 +1,8 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, Text } from 'react-native';
 import { SelectableCircleView } from '..';
 
-interface WeeklyProps {
+interface MonthlyProps {
     onChange: (weeklyValues: string[]) => void;
 }
 
@@ -10,7 +10,7 @@ interface WeeklyProps {
  * Displays a list of selectable weekdays
  * @param props
  */
-const WeeklyView = (props: WeeklyProps): JSX.Element => {
+const WeeklyView = (props: MonthlyProps): JSX.Element => {
     const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const [selectedDays, setSelectedDays] = React.useState<string[]>([]);
 
@@ -18,7 +18,7 @@ const WeeklyView = (props: WeeklyProps): JSX.Element => {
      * Adding/removing a selected weekday
      * @param day The day to add/remove
      */
-    const onPressWeekday = (day: string): void => {
+    const onPressDay = (day: string): void => {
         let updatedValues = selectedDays;
 
         if (selectedDays.includes(day)) {
@@ -36,11 +36,11 @@ const WeeklyView = (props: WeeklyProps): JSX.Element => {
     return (
         <>
             <View style={styles.container}>
-                {weekdays.map((weekday) => (
+                {[...Array(31).keys()].map((value) => (
                     <SelectableCircleView
                         style={styles.selectableView}
-                        title={weekday.substring(0, 2)}
-                        onPress={onPressWeekday}
+                        title={(value + 1).toString()}
+                        onPress={onPressDay}
                     />
                 ))}
             </View>
@@ -50,9 +50,11 @@ const WeeklyView = (props: WeeklyProps): JSX.Element => {
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'row',
-        padding: 20,
+        paddingVertical: 20,
         justifyContent: 'center',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        lineHeight: 40,
     },
     selectableView: {
         margin: 10,

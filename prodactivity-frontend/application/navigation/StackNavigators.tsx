@@ -27,7 +27,7 @@ export const TabStackNavigator = ({ route, navigation }) => {
 };
 
 const HomeStack = createStackNavigator();
-export const HomeStackScreen = ({ route, navigation }) => {
+export const HomeStackScreen = ({ route, navigation }): JSX.Element => {
     return (
         <HomeStack.Navigator mode="modal">
             <HomeStack.Screen
@@ -62,7 +62,7 @@ export const HomeStackScreen = ({ route, navigation }) => {
 };
 
 const LoginStack = createStackNavigator();
-export const LoginStackScreen = ({ route, navigation }) => {
+export const LoginStackScreen = ({ route, navigation }): JSX.Element => {
     return (
         <LoginStack.Navigator>
             <LoginStack.Screen

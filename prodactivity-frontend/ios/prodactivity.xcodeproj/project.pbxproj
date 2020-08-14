@@ -10,7 +10,6 @@
 		00E356F31AD99517003FC87E /* prodactivityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* prodactivityTests.m */; };
 		044BCF1C4BB14D6887DD568C /* NotoSansHK-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F8884B40954E4BB38633B886 /* NotoSansHK-Bold.otf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
-		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
@@ -22,6 +21,7 @@
 		74508E21815B6187A644EE7E /* libPods-prodactivity-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD916928BD217DE9C8683618 /* libPods-prodactivity-tvOSTests.a */; };
 		8602B1DD4FAA4B3EB7FB0004 /* NotoSansHK-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4BE09FB3841F4315BC340D37 /* NotoSansHK-Regular.otf */; };
 		8A7A3127DA9C48E2BE301AE7 /* NotoSansHK-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 91D5A64F09D04D72B1F91B02 /* NotoSansHK-Thin.otf */; };
+		9028C14224C4C67C0083C82A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9028C14024C4C67C0083C82A /* LaunchScreen.storyboard */; };
 		A667E09765F2423996BA2E1A /* NotoSansHK-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8B9E29013B89442DA9EC7B48 /* NotoSansHK-Black.otf */; };
 		AE7C994D1FF1D54C2C3096B5 /* libPods-prodactivity-prodactivityTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 476D2B0E1D0A9A92326A14AB /* libPods-prodactivity-prodactivityTests.a */; };
 		F69688675DF642A4AFCBFA7E /* NotoSansHK-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 227FA9001DBA4E20BE2D959A /* NotoSansHK-Medium.otf */; };
@@ -72,6 +72,7 @@
 		867C139B88FBF9356DF5B05B /* Pods-prodactivity-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-prodactivity-tvOS.release.xcconfig"; path = "Target Support Files/Pods-prodactivity-tvOS/Pods-prodactivity-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		87C467B37CAD4E898BE4F692 /* NotoSansHK-Light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSansHK-Light.otf"; path = "../assets/fonts/NotoSansHK-Light.otf"; sourceTree = "<group>"; };
 		8B9E29013B89442DA9EC7B48 /* NotoSansHK-Black.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSansHK-Black.otf"; path = "../assets/fonts/NotoSansHK-Black.otf"; sourceTree = "<group>"; };
+		9028C14124C4C67C0083C82A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = prodactivity/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		91D5A64F09D04D72B1F91B02 /* NotoSansHK-Thin.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSansHK-Thin.otf"; path = "../assets/fonts/NotoSansHK-Thin.otf"; sourceTree = "<group>"; };
 		9DEC609A9A5C4FECB42DC15C /* extravaganzza.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = extravaganzza.ttf; path = ../assets/fonts/extravaganzza.ttf; sourceTree = "<group>"; };
 		A30D5E2B4CF812E1A4055FEB /* Pods-prodactivity-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-prodactivity-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-prodactivity-tvOSTests/Pods-prodactivity-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -189,6 +190,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				9028C14024C4C67C0083C82A /* LaunchScreen.storyboard */,
 				13B07FAE1A68108700A75B9A /* prodactivity */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* prodactivityTests */,
@@ -240,6 +242,7 @@
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
+				2B9650599A25E1B7A95A7B04 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -261,6 +264,7 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				970ABEE40074051A85E82DFE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -369,8 +373,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9028C14224C4C67C0083C82A /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				8602B1DD4FAA4B3EB7FB0004 /* NotoSansHK-Regular.otf in Resources */,
 				A667E09765F2423996BA2E1A /* NotoSansHK-Black.otf in Resources */,
 				044BCF1C4BB14D6887DD568C /* NotoSansHK-Bold.otf in Resources */,
@@ -434,6 +438,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		2B9650599A25E1B7A95A7B04 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-prodactivity-prodactivityTests/Pods-prodactivity-prodactivityTests-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-prodactivity-prodactivityTests/Pods-prodactivity-prodactivityTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -490,6 +512,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		970ABEE40074051A85E82DFE /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-prodactivity/Pods-prodactivity-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-prodactivity/Pods-prodactivity-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BCDB3AE94173B7FF7E19CD04 /* [CP] Check Pods Manifest.lock */ = {
@@ -612,6 +652,14 @@
 			);
 			name = LaunchScreen.xib;
 			path = prodactivity;
+			sourceTree = "<group>";
+		};
+		9028C14024C4C67C0083C82A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9028C14124C4C67C0083C82A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
